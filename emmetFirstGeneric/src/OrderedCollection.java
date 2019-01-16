@@ -5,9 +5,28 @@ import java.util.Comparator;
  * Stores an ordered collection of objects, which can have values added to and removed from it
  * Created using the textbook as reference
  */
+class CaseInsensitiveCompare implements Comparator<String>{
+	@Override
+	public int compare(String o1, String o2) {
+		return o1.compareToIgnoreCase(o2);
+	}
+}
 public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	public OrderedCollection(){
 	
+	}
+	public String toString(){
+		String output = null;
+		if(!isEmpty()){
+			output= (String) memory[0];
+			if(memory.length>1){
+				
+				for(int i=1; i<memory.length;i++){
+					output+=", "+(String) memory[i];
+				}
+			}
+		}
+		return output;
 	}
 	private int search(Comparable<? super AnyType> x){
 		if(!isEmpty()){
@@ -54,18 +73,18 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 			if(memory[i]!=null)size++;
 		}
 		Object [] tempMem=new Object[size];
-		int j=0;
-		for(int i=0; i<size;i++){
-			if(memory[j]!=null) tempMem[i]=memory[j];
-			else i--;
-			j++;
+		int memIndex=0;
+		for(int tempMemIndex=0; tempMemIndex<size;tempMemIndex++){
+			if(memory[memIndex]!=null) tempMem[tempMemIndex]=memory[memIndex];
+			else tempMemIndex--;
+			memIndex++;
 		}
 		memory=tempMem;
 	}
 	public int memSize(){
 		return memory.length;
 	}
-	Object [] memory = null;
+	private Object [] memory = null;
 	Comparator cmp= new Comparator() {
 		@Override
 		public int compare(Object o1, Object o2) {
@@ -94,6 +113,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 			int minIndex=0;
 			for(int i=0;i<memory.length;i++){
 				if(cmp.compare(memory[i],memory[minIndex])>0)minIndex=i;
+//				memory[i]
 			}
 			return (AnyType) memory[minIndex];
 		}
