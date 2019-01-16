@@ -43,13 +43,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		for (int i=0;i<memory.length;i++){
 			if(memory[i]==x){
 				memory[i]=null;
-				Object [] tempMem=new Object[memory.length-1];
-				int k=0;
-				for(int j=0;j<memory.length;j++){
-					//if()
-				}
 				clean();
-				//memory=tempMem;
 				return true;
 			}
 		}return false;
@@ -63,10 +57,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		int j=0;
 		for(int i=0; i<size;i++){
 			if(memory[j]!=null) tempMem[i]=memory[j];
-			else {
-				//j++;
-				i--;
-			}
+			else i--;
 			j++;
 		}
 		memory=tempMem;
@@ -118,9 +109,11 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		System.out.println(x.search(10));
 		System.out.println(x.search(12));
 		System.out.println(x.memSize());
-		x.remove(12);
+		System.out.println(x.remove(12));
 		System.out.println(x.search(10));
 		System.out.println(x.search(15));
 		System.out.println(x.memSize());
+		x.makeEmpty();
+		System.out.println(x.isEmpty());
 	}
 }
