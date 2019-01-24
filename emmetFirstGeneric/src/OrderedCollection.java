@@ -85,23 +85,16 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		return memory.length;
 	}
 	private Object [] memory = null;
-	Comparator cmp= new Comparator() {
-		@Override
-		public int compare(Object o1, Object o2) {
-			return 0;
-		}
-		
-		@Override
-		public boolean equals(Object obj) {
-			return false;
-		}
-	};
+	public static <AnyType>
+	int compare(AnyType lhs, AnyType rhs){
+		return 0;
+	}
 	public <AnyType>
 	AnyType findMax(){
 		if(!isEmpty()){
 			int maxIndex=0;
 			for(int i=0;i<memory.length;i++){
-				if(cmp.compare(memory[i],memory[maxIndex])>0)maxIndex=i;
+				if(OrderedCollection.<AnyType>compare(memory[i],memory[maxIndex])>0)maxIndex=i;
 			}
 			return (AnyType) memory[maxIndex];
 		}
