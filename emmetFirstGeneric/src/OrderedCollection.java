@@ -85,11 +85,15 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		return memory.length;
 	}
 	private Object [] memory = null;
-	public static <AnyType>
+	public static <AnyType extends Comparable<? super AnyType>>
 	int compare(AnyType lhs, AnyType rhs){
-		return 0;
+		return lhs.compareTo(rhs);
 	}
-	public <AnyType>
+	public static //<String>
+	int compare(String lhs, String rhs){
+		return (int) new CaseInsensitiveCompare().compare(lhs,rhs);
+	}
+	public <AnyType extends Comparable<? super  AnyType>>
 	AnyType findMax(){
 		if(!isEmpty()){
 			int maxIndex=0;
@@ -100,7 +104,8 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		}
 		else return null;
 	}
-	public <AnyType>
+	
+	public <AnyType extends Comparable<? super AnyType>>
 	AnyType findMin(){
 		if(!isEmpty()){
 			int minIndex=0;
@@ -126,6 +131,8 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		System.out.println(x.search(10));
 		System.out.println(x.search(15));
 		System.out.println(x.memSize());
+		System.out.println((String) x.findMax());
+		System.out.println((String) x.findMin());
 		x.makeEmpty();
 		System.out.println(x.isEmpty());
 	}
