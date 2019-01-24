@@ -1,16 +1,8 @@
-import java.util.Comparator;
-
 /**
  * @author Emmet Stanevich
  * Stores an ordered collection of objects, which can have values added to and removed from it
  * Created using the textbook as reference
  */
-class CaseInsensitiveCompare implements Comparator<String>{
-	@Override
-	public int compare(String o1, String o2) {
-		return o1.compareToIgnoreCase(o2);
-	}
-}
 public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	public OrderedCollection(){
 	
@@ -85,14 +77,6 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		return memory.length;
 	}
 	private Comparable [] memory = null;
-	public static <AnyType extends Comparable<? super AnyType>>
-	int compare(AnyType lhs, AnyType rhs){
-		return lhs.compareTo(rhs);
-	}
-	public static //<String>
-	int compare(String lhs, String rhs){
-		return (int) new CaseInsensitiveCompare().compare(lhs,rhs);
-	}
 	public <AnyType extends Comparable<? super  AnyType>>
 	AnyType findMax(){
 		if(!isEmpty()){
