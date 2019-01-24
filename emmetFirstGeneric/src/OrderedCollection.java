@@ -20,6 +20,10 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		}
 		return output;
 	}
+	/**
+	 * Returns the positional index of a specified object
+	 * @param x the object for the function to look for
+	 */
 	private int search(Comparable<? super AnyType> x){
 		if(!isEmpty()){
 			int pos=-1;
