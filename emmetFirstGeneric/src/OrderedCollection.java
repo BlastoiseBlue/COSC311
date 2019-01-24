@@ -8,17 +8,18 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	
 	}
 	public String toString(){
-		String output = null;
+		StringBuilder output = null;
 		if(!isEmpty()){
-			output= (String) memory[0];
+			output = new StringBuilder((String) memory[0]);
 			if(memory.length>1){
 				
 				for(int i=1; i<memory.length;i++){
-					output+=", "+ memory[i];
+					output.append(", ").append(memory[i]);
 				}
 			}
 		}
-		return output;
+		assert output != null;
+		return output.toString();
 	}
 	/**
 	 * Returns the positional index of a specified object
@@ -40,22 +41,24 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	public void makeEmpty(){
 		memory=null;
 	}
-	public void insert(Comparable<? super AnyType> x){
+	/**
+	public void insert(Comparable<? super AnyType> newEntry){
 		if(isEmpty()){
 			memory=new Comparable[1];
-			memory[0]= x;
+			memory[0]= newEntry;
 		}
 		else {
 			Comparable [] tempMem=new Comparable[memory.length+1];
 			for(int i=0;i<memory.length;i++)tempMem[i]=memory[i];
-			tempMem[memory.length]=x;
+			tempMem[memory.length]=newEntry;
 			memory=tempMem;
 		}
 		
 	}
-	public boolean remove(AnyType x){
+	
+	public boolean remove(AnyType target){
 		for (int i=0;i<memory.length;i++){
-			if(memory[i].compareTo(x)==0){
+			if(memory[i].compareTo(target)==0){
 				memory[i]=null;
 				clean();
 				return true;
