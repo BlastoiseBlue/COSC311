@@ -14,7 +14,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 			if(memory.length>1){
 				
 				for(int i=1; i<memory.length;i++){
-					output+=", "+(String) memory[i];
+					output+=", "+ memory[i];
 				}
 			}
 		}
@@ -35,8 +35,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		else return -1;
 	}
 	public boolean isEmpty(){
-		if(memory==null)return true;
-		else return false;
+		return memory == null;
 	}
 	public void makeEmpty(){
 		memory=null;
@@ -44,7 +43,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	public void insert(Comparable<? super AnyType> x){
 		if(isEmpty()){
 			memory=new Comparable[1];
-			memory[0]= (AnyType) x;
+			memory[0]= x;
 		}
 		else {
 			Comparable [] tempMem=new Comparable[memory.length+1];
@@ -65,8 +64,8 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	}
 	private void clean(){
 		int size=0;
-		for(int i=0; i<memory.length;i++){
-			if(memory[i]!=null)size++;
+		for (Comparable comparable : memory) {
+			if (comparable != null) size++;
 		}
 		Comparable [] tempMem=new Comparable[size];
 		int memIndex=0;
