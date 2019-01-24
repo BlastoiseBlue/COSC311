@@ -47,11 +47,11 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	}
 	public void insert(Comparable<? super AnyType> x){
 		if(isEmpty()){
-			memory=new Object[1];
+			memory=new Comparable[1];
 			memory[0]= (AnyType) x;
 		}
 		else {
-			Object [] tempMem=new Object[memory.length+1];
+			Comparable [] tempMem=new Comparable[memory.length+1];
 			for(int i=0;i<memory.length;i++)tempMem[i]=memory[i];
 			tempMem[memory.length]=x;
 			memory=tempMem;
@@ -60,7 +60,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	}
 	public boolean remove(AnyType x){
 		for (int i=0;i<memory.length;i++){
-			if(memory[i]==x){
+			if(memory[i].compareTo(x)==0){
 				memory[i]=null;
 				clean();
 				return true;
@@ -72,7 +72,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		for(int i=0; i<memory.length;i++){
 			if(memory[i]!=null)size++;
 		}
-		Object [] tempMem=new Object[size];
+		Comparable [] tempMem=new Comparable[size];
 		int memIndex=0;
 		for(int tempMemIndex=0; tempMemIndex<size;tempMemIndex++){
 			if(memory[memIndex]!=null) tempMem[tempMemIndex]=memory[memIndex];
@@ -84,7 +84,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 	public int memSize(){
 		return memory.length;
 	}
-	private Object [] memory = null;
+	private Comparable [] memory = null;
 	public static <AnyType extends Comparable<? super AnyType>>
 	int compare(AnyType lhs, AnyType rhs){
 		return lhs.compareTo(rhs);
@@ -98,7 +98,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		if(!isEmpty()){
 			int maxIndex=0;
 			for(int i=0;i<memory.length;i++){
-				if(OrderedCollection.<AnyType>compare(memory[i],memory[maxIndex])>0)maxIndex=i;
+				if(memory[i].compareTo(memory[maxIndex])>0)maxIndex=i;
 			}
 			return (AnyType) memory[maxIndex];
 		}
@@ -110,8 +110,7 @@ public class OrderedCollection <AnyType extends Comparable<? super AnyType>> {
 		if(!isEmpty()){
 			int minIndex=0;
 			for(int i=0;i<memory.length;i++){
-				if(cmp.compare(memory[i],memory[minIndex])>0)minIndex=i;
-//				memory[i]
+				if(memory[i].compareTo(memory[minIndex])<0)minIndex=i;
 			}
 			return (AnyType) memory[minIndex];
 		}
