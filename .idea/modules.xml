@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/COSC311.iml" filepath="$PROJECT_DIR$/COSC311.iml" />
       <module fileurl="file://$PROJECT_DIR$/emmetFirstGeneric/emmetFirstGeneric.iml" filepath="$PROJECT_DIR$/emmetFirstGeneric/emmetFirstGeneric.iml" />
       <module fileurl="file://$PROJECT_DIR$/emmetSquares/emmetSquares.iml" filepath="$PROJECT_DIR$/emmetSquares/emmetSquares.iml" />
+      <module fileurl="file://$PROJECT_DIR$/homework/homework.iml" filepath="$PROJECT_DIR$/homework/homework.iml" />
     </modules>
   </component>
 </project>
