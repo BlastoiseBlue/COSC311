@@ -5,8 +5,9 @@
  */
 public class MyTimings {
 	public static void main(String[] args){
-		final int scale=1000;
-		long[] myNs={10000,20000,40000,80000,160000,320000};
+		final int scale=100;
+		long[] myNs={100,200,400,800,1600,3200};
+		System.out.println("Fragment 1:");
 		for (int i = 0; i < myNs.length; i++) {
 			long startTime = System.nanoTime();
 			for (int j = 0; j < scale; j++) {
@@ -16,6 +17,37 @@ public class MyTimings {
 			long runTime = endTime - startTime;
 			System.out.println("Runtime for n=" + myNs[i] + " was " + runTime / scale + " nanoSeconds");
 		}
+		System.out.println("Fragment 3:");
+		for (int i = 0; i < myNs.length; i++) {
+			long startTime = System.nanoTime();
+			for (int j = 0; j < scale; j++) {
+				fragment3(myNs[i]);
+			}
+			long endTime = System.nanoTime();
+			long runTime = endTime - startTime;
+			System.out.println("Runtime for n=" + myNs[i] + " was " + runTime / scale + " nanoSeconds");
+		}
+		System.out.println("Fragment 5:");
+		for (int i = 0; i < myNs.length; i++) {
+			long startTime = System.nanoTime();
+			for (int j = 0; j < scale; j++) {
+				fragment5(myNs[i]);
+			}
+			long endTime = System.nanoTime();
+			long runTime = endTime - startTime;
+			System.out.println("Runtime for n=" + myNs[i] + " was " + runTime / scale + " nanoSeconds");
+		}
+		System.out.println("Fragment 6:");
+		for (int i = 0; i < myNs.length; i++) {
+			long startTime = System.nanoTime();
+			for (int j = 0; j < scale; j++) {
+				fragment6(myNs[i]);
+			}
+			long endTime = System.nanoTime();
+			long runTime = endTime - startTime;
+			System.out.println("Runtime for n=" + myNs[i] + " was " + runTime / scale + " nanoSeconds");
+		}
+		
 	}
 	public static void fragment1(long n){
 		long sum=0;
