@@ -1,7 +1,8 @@
 /**
  * @author Emmet Stanevich
+ * Created on 2/18/29
  * This program will output times for each "fragment"
- * ...and so it begins
+ * ...and so begins my torment
  */
 public class MyTimings {
 	public static void main(String[] args){
