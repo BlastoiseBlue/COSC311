@@ -3,6 +3,7 @@
  * Created on 2/18/29
  * This program will output times for each "fragment"
  * ...and so begins my torment
+ * WARNING: I make no gurarntee as to whether this runs on your computer in a timely manner, and fragment 6 is still too slow for me to get precise data from
  */
 public class MyTimings {
 	public static void main(String[] args){
