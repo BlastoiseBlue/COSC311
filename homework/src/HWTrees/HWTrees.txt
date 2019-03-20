@@ -86,13 +86,19 @@ Base case: For a binary tree of 1, there are 2 null links (nulls(n))
 Inductive hyp: Assume Thm holds for n<=k
 For a binary tree of k nodes, there are k+1 null links (nulls(k))
 nulls(k+1)=nulls(k)+2-1
-nulls(k)+2-1=nulls(k)+1=(k+1)+1=k+2
-nulls(k+1)=(k+1)+1 QED
+By the inductive hypothesis, right side becomes k+1+2-1
+nulls(k+1)=k+2 QED
 For each additional node, one null link is filled, while the new node has 2 null links.
 4.5)
-Base case: For h=0, max # of nodes is 2^(0+1)-1==2-1==1
-Inductive hyp: Addume thm holds for h<=k
-For a binary tree of height k, max # of nodes is 2^(k+1)-1
+Base case: For h=0, max # of nodes is 2^(0+1)-1=2-1=1
+Inductive hyp: Assume Thm holds for h<=k
+For a binary tree of height k, max # of nodes (max(k)) is 2^(k+1)-1
 for height k+1, max # of nodes is 2^(k+2)-1
 for height k=0, max # of nodes is 2^(0+1)-1=2-1=1
 for height k=1, max # of nodes is 2^(1+1)-1=4-1=3
+max(k)=(max(k-1)+1)*2-1
+???
+4.8)
+Prefix: -**+cdabe
+Infix: a*b*(c+d)-e
+Postfix: cd+b*a*e-
