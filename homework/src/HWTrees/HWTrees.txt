@@ -1,0 +1,98 @@
+Emmet Stanevich
+3/20/19
+COSC 331
+HW Trees
+4.2)
+A)
+a)	null
+b)	B, C
+c)	null
+d)	0
+e)	4
+B)
+a)	A
+b)	D, E
+c)	C
+d)	1
+e)	3
+C)
+a)	A
+b)	F
+c)	C
+d)	1
+e)	2
+D)
+a)	B
+b)	G, H
+c)	E
+d)	2
+e)	1
+E)
+a)	B
+b)	I, J
+c)	D
+d)	2
+e)	2
+F)
+a)	C
+b)	K
+c)	null
+d)	2
+e)	1
+G)
+a)	D
+b)	null
+c)	H
+d)	3
+e)	0
+H)
+a)	D
+b)	null
+c)	G
+d)	3
+e)	0
+I)
+a)	E
+b)	null
+c)	J
+d)	3
+e)	0
+J)
+a)	E
+b)	L, M
+c)	I
+d)	3
+e)	1
+K)
+a)	F
+b)	null
+c)	null
+d)	3
+e)	0
+L)
+a)	J
+b)	null
+c)	M
+d)	4
+e)	0
+M)
+a)	J
+b)	null
+c)	L
+d)	4
+e)	0
+4.4)
+Base case: For a binary tree of 1, there are 2 null links (nulls(n))
+Inductive hyp: Assume Thm holds for n<=k
+For a binary tree of k nodes, there are k+1 null links (nulls(k))
+nulls(k+1)=nulls(k)+2-1
+nulls(k)+2-1=nulls(k)+1=(k+1)+1=k+2
+nulls(k+1)=(k+1)+1 QED
+For each additional node, one null link is filled, while the new node has 2 null links.
+4.5)
+Base case: For h=0, max # of nodes is 2^(0+1)-1==2-1==1
+Inductive hyp: Addume thm holds for h<=k
+For a binary tree of height k, max # of nodes is 2^(k+1)-1
+for height k+1, max # of nodes is 2^(k+2)-1
+for height k=0, max # of nodes is 2^(0+1)-1=2-1=1
+for height k=1, max # of nodes is 2^(1+1)-1=4-1=3
