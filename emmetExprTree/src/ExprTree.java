@@ -4,6 +4,9 @@
 import sun.reflect.generics.tree.Tree;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Stack;
 
 public class ExprTree implements Cloneable{
 	// Data member
@@ -31,7 +34,9 @@ public class ExprTree implements Cloneable{
 	 */
 	public Object clone(){
 		try {
-			return super.clone();
+			ExprTree c = (ExprTree) super.clone();
+			c.root=root.deepCopy();
+			return c;
 		}catch (CloneNotSupportedException e){
 			throw new InternalError("\nThis class does not implement Cloneable");
 		}
@@ -44,15 +49,37 @@ public class ExprTree implements Cloneable{
 	 *  Get a string representing the prefix notation form of an expression from the console.
 	 *  Create a expression tree representing that string.
 	 **/
-//	public void build ( ) throws IOException // Build tree from prefix expression
-//	{}
+	public void build () throws IOException // Build tree from prefix expression
+	{
+		Scanner kbd=new Scanner(System.in);
+		byte[] input=kbd.nextLine().getBytes();
+		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
+		buildSub(root,buffer);
+	}
+	public void build (String s){
+		byte[] input=s.getBytes();
+		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
+		buildSub(root,buffer);
+	}
+	public void buildSub(TreeNode n, ByteArrayInputStream b){
+		n.setElement((char) b.read());
+		if(Character.isDigit(n.getElement())){
+			n.setLeft(null);
+			n.setRight(null);
+		}
+		else{
+			n.setLeft(new ExprTreeNode());
+			n.setRight(new ExprTreeNode());
+			buildSub(n.getLeft(),b);
+			buildSub(n.getRight(),b);
+		}
+	}
 //	public void expression ( )  // Output expression in infix form
 //	{}
 //	public float evaluate ( )   // Evaluate expression
 //	{}
 	public void clear ( )   // Clear tree
 	{
-		root.clear();
 		root=null;
 	}
 	
