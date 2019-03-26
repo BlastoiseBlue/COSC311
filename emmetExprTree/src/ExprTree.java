@@ -13,59 +13,11 @@ public class ExprTree implements Cloneable{
 	public ExprTree (TreeNode r){
 		root=r;
 	}
-	class ExprTreeNode implements TreeNode, Cloneable{
-		private char element;
-		private TreeNode left, right;
-		ExprTreeNode(char elem, TreeNode l, TreeNode r){
-			element=elem;
-			left=l;
-			right=r;
-		}
-		ExprTreeNode(char elem){
-			new ExprTreeNode(elem,null,null);
-		}
-		
-		
-		public void setElement(char elem){
-			element =elem;
-		}
-		public char getElement(){
-			return element;
-		}
-		public TreeNode getLeft(){
-			return left;
-		}
-		public TreeNode getRight(){
-			return right;
-		}
-		public TreeNode setLeft(TreeNode node){
-			left=node;
-			return left;
-		}
-		public TreeNode setRight(TreeNode node){
-			right=node;
-			return right;
-		}
-		public Object clone(){
-			try {
-				return super.clone();
-			}catch (CloneNotSupportedException e){
-				throw new InternalError("\nThis class does not implement Cloneable");
-			}
-		}
-		public ExprTreeNode deepCopy(){
-			return new ExprTreeNode(getElement(),
-					getLeft()==null?null:getLeft().deepCopy(),
-					getRight()==null?null:getRight().deepCopy());
-		}
-		public void clear(){
-			left.clear();
-			left=null;
-			right.clear();
-			right=null;
-			
-		}
+	public ExprTree(String s){
+		root=new ExprTreeNode();
+		build(s);
 	}
+	
 	// In-lab 1
 	// Remove the surrounding comment markers when ready to implement
     
