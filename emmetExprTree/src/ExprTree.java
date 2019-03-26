@@ -58,6 +58,13 @@ public class ExprTree implements Cloneable{
 					getLeft()==null?null:getLeft().deepCopy(),
 					getRight()==null?null:getRight().deepCopy());
 		}
+		public void clear(){
+			left.clear();
+			left=null;
+			right.clear();
+			right=null;
+			
+		}
 	}
 	// In-lab 1
 	// Remove the surrounding comment markers when ready to implement
@@ -91,8 +98,11 @@ public class ExprTree implements Cloneable{
 //	{}
 //	public float evaluate ( )   // Evaluate expression
 //	{}
-//	public void clear ( )   // Clear tree
-//	{}
+	public void clear ( )   // Clear tree
+	{
+		root.clear();
+		root=null;
+	}
 	
 	public void showStructure ( ) {
 		// Outputs an expression tree. The tree is output rotated counter-

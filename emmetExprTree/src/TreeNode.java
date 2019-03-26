@@ -44,4 +44,9 @@ public interface TreeNode
 	 * @return A deep copy of this node
 	 */
 	TreeNode deepCopy();
+	
+	/**
+	 * Recursively clears all children of this node
+	 */
+	void clear();
 }
