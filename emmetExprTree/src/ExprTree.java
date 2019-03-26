@@ -93,14 +93,21 @@ public class ExprTree implements Cloneable{
 	}
 	public void expression ( )  // Output expression in infix form
 	{
-		System.out.println(expressionSub((ExprTreeNode) root));
+		expressionSub((ExprTreeNode) root);
+		System.out.println();
 	}
-	private String expressionSub(ExprTreeNode n){
-		String s = "";
-		if(n.getLeft()!=null)s.concat(expressionSub((ExprTreeNode) n.getLeft()));
-		s.concat(Character.toString(n.getElement()));
-		if(n.getRight()!=null)s.concat(expressionSub((ExprTreeNode)n.getRight()));
-		return s;
+	private void expressionSub(ExprTreeNode n){
+		//String s = "";
+		if(n.getLeft()!=null) {
+			System.out.print("(");
+			expressionSub((ExprTreeNode)n.getLeft());
+		}// else
+		System.out.print(n.getElement());
+		if(n.getRight()!=null) {
+			expressionSub((ExprTreeNode)n.getRight());
+			System.out.print(")");
+		}
+		//return s;
 	}
 	public float evaluate ( )   // Evaluate expression
 	{
@@ -149,11 +156,9 @@ public class ExprTree implements Cloneable{
     }
     
 	private ExprTreeNode commuteSub(ExprTreeNode n){
-		ExprTreeNode newNode= (ExprTreeNode) n.clone();
-		if(newNode.isLeaf())return (ExprTreeNode) newNode.clone();
-		ExprTreeNode placeHolder= commuteSub((ExprTreeNode) newNode.getLeft().clone());
-		newNode.setLeft(commuteSub((ExprTreeNode) newNode.getRight().clone()));
-		newNode.setRight(placeHolder);
+		ExprTreeNode newNode=new ExprTreeNode(n.getElement(),null,null);
+		if(n.getLeft()!=null)newNode.setRight(commuteSub((ExprTreeNode) n.getLeft()));
+		if(n.getRight()!=null)newNode.setLeft(commuteSub((ExprTreeNode)n.getRight()));
 		return newNode;
 	}
 	// Recursive partners of the public member methods ....
