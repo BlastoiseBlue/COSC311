@@ -24,6 +24,8 @@ public class ExprTree implements Cloneable{
 		ExprTreeNode(char elem){
 			new ExprTreeNode(elem,null,null);
 		}
+		
+		
 		public void setElement(char elem){
 			element =elem;
 		}
@@ -51,19 +53,24 @@ public class ExprTree implements Cloneable{
 				throw new InternalError("\nThis class does not implement Cloneable");
 			}
 		}
-		ExprTreeNode deepCopy(ExprTreeNode n){
-			return new ExprTreeNode(n.element,
-					n.left==null?null:deepCopy(n.left),
-					n.right==null?null:deepCopy(n.right));
+		public ExprTreeNode deepCopy(){
+			return new ExprTreeNode(getElement(),
+					getLeft()==null?null:getLeft().deepCopy(),
+					getRight()==null?null:getRight().deepCopy());
 		}
 	}
 	// In-lab 1
 	// Remove the surrounding comment markers when ready to implement
     
     public ExprTree ( ExprTree valueTree ){
-		
+		new ExprTree(valueTree.root.deepCopy());
     }
-    public Object clone(){
+	
+	/**
+	 * Clones the tree
+	 * @return The new copy of the tree
+	 */
+	public Object clone(){
 		try {
 			return super.clone();
 		}catch (CloneNotSupportedException e){
