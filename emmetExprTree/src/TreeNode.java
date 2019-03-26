@@ -38,5 +38,10 @@ public interface TreeNode
 	 * @return The root of the right subtree
 	 */
 	TreeNode setRight(TreeNode node);
+	
+	/**
+	 * Makes a copy of this node and its children recursively
+	 * @return A deep copy of this node
+	 */
 	TreeNode deepCopy();
 }

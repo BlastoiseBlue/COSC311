@@ -54,16 +54,16 @@ public class ExprTree implements Cloneable{
 			}
 		}
 		public ExprTreeNode deepCopy(){
-			return new ExprTreeNode(element,
-					left==null?null:left.deepCopy(),
-					right==null?null:right.deepCopy());
+			return new ExprTreeNode(getElement(),
+					getLeft()==null?null:getLeft().deepCopy(),
+					getRight()==null?null:getRight().deepCopy());
 		}
 	}
 	// In-lab 1
 	// Remove the surrounding comment markers when ready to implement
     
     public ExprTree ( ExprTree valueTree ){
-		return new ExprTree(valueTree.root.deepCopy());
+		new ExprTree(valueTree.root.deepCopy());
     }
 	
 	/**
