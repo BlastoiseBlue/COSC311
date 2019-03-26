@@ -5,7 +5,7 @@ import sun.reflect.generics.tree.Tree;
 
 import java.io.*;
 
-public class ExprTree{
+public class ExprTree implements Cloneable{
 	// Data member
 	private TreeNode root;  // Reference to the root node
 	
@@ -13,7 +13,7 @@ public class ExprTree{
 	public ExprTree (TreeNode r){
 		root=r;
 	}
-	class ExprTreeNode implements TreeNode{
+	class ExprTreeNode implements TreeNode, Cloneable{
 		private char element;
 		private TreeNode left, right;
 		ExprTreeNode(char elem, TreeNode l, TreeNode r){
@@ -44,10 +44,17 @@ public class ExprTree{
 			right=node;
 			return right;
 		}
-		public TreeNode copy(){
-			//TreeNode clone = (TreeNode) super.clone();
-			
-			return new ExprTreeNode(element,left==null?null:left.copy(),right==null?null:right.copy());
+		public Object clone(){
+			try {
+				return super.clone();
+			}catch (CloneNotSupportedException e){
+				throw new InternalError("\nThis class does not implement Cloneable");
+			}
+		}
+		ExprTreeNode deepCopy(ExprTreeNode n){
+			return new ExprTreeNode(n.element,
+					n.left==null?null:deepCopy(n.left),
+					n.right==null?null:deepCopy(n.right));
 		}
 	}
 	// In-lab 1
@@ -56,9 +63,12 @@ public class ExprTree{
     public ExprTree ( ExprTree valueTree ){
 		
     }
-    public Object copy(){
-	    //return super.clone();
-	    return new ExprTree(root.copy());
+    public Object clone(){
+		try {
+			return super.clone();
+		}catch (CloneNotSupportedException e){
+			throw new InternalError("\nThis class does not implement Cloneable");
+		}
     }
     
 	

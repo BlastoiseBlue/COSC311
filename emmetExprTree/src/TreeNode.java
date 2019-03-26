@@ -38,6 +38,4 @@ public interface TreeNode
 	 * @return The root of the right subtree
 	 */
 	TreeNode setRight(TreeNode node);
-	
-	TreeNode copy();
 }
