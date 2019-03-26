@@ -13,7 +13,7 @@ public class ExprTree implements Cloneable{
 	private TreeNode root;  // Reference to the root node
 	
 	// Constructor
-	public ExprTree (TreeNode r){
+	public ExprTree (ExprTreeNode r){
 		root=r;
 	}
 	public ExprTree(String s){
@@ -25,7 +25,8 @@ public class ExprTree implements Cloneable{
 	// Remove the surrounding comment markers when ready to implement
     
     public ExprTree ( ExprTree valueTree ){
-		new ExprTree(valueTree.root.deepCopy());
+		valueTree.clone();
+		this.root=valueTree.root.deepCopy();
     }
 	
 	/**
@@ -142,10 +143,19 @@ public class ExprTree implements Cloneable{
 	
 	// In-lab 2
 	// Remove the surrounding comment markers when ready to implement
-    /* public void commute ( )  // Commute all subexpr.
-    {}
-    */
-	
+     public void commute ( )  // Commute all subexpr.
+    {
+    	root=commuteSub((ExprTreeNode) root);
+    }
+    
+	private ExprTreeNode commuteSub(ExprTreeNode n){
+		ExprTreeNode newNode= (ExprTreeNode) n.clone();
+		if(newNode.isLeaf())return (ExprTreeNode) newNode.clone();
+		ExprTreeNode placeHolder= commuteSub((ExprTreeNode) newNode.getLeft().clone());
+		newNode.setLeft(commuteSub((ExprTreeNode) newNode.getRight().clone()));
+		newNode.setRight(placeHolder);
+		return newNode;
+	}
 	// Recursive partners of the public member methods ....
 	// -- insert/complete the definition of these methods here.
 	

@@ -12,7 +12,7 @@ class TestExprTree
 {
     public static void main(String args[]) throws IOException 
     {
-        ExprTree testExpression = new ExprTree("+12");    // Test expression
+        ExprTree testExpression = new ExprTree(new ExprTreeNode('+',new ExprTreeNode('1'),new ExprTreeNode('2')));    // Test expression
         ExprTree assignExpression = new ExprTree(testExpression);  // Test copying ExprTree
         
         System.out.println( );
@@ -30,19 +30,19 @@ class TestExprTree
         System.out.println("Original ExprTree is:");
         testExpression.showStructure();
     
-        System.out.println("\nversus Cloning");
+        System.out.println("\nVersus Cloning");
         assignExpression = (ExprTree)testExpression.clone();
         dummy(assignExpression);
         System.out.println("Original ExprTree is:");
         testExpression.showStructure();
     
-//        // Test the commute operation.  (In-lab Exercise 2)
-//        testExpression.commute();
-//        System.out.println( );
-//        System.out.println("Fully commuted tree: ");
-//        testExpression.showStructure();
-//        testExpression.expression();
-//        System.out.println(" = " + testExpression.evaluate());
+        // Test the commute operation.  (In-lab Exercise 2)
+        testExpression.commute();
+        System.out.println( );
+        System.out.println("Fully commuted tree: ");
+        testExpression.showStructure();
+        testExpression.expression();
+        System.out.println(" = " + testExpression.evaluate());
         
         System.out.println( );
         System.out.println("Clear the tree");

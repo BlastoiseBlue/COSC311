@@ -21,7 +21,9 @@ class ExprTreeNode implements TreeNode, Cloneable{
 //		setElement((char) b.read());
 //		if()
 //	}
-	
+	public boolean isLeaf(){
+		return(left==null&&right==null);
+	}
 	public void setElement(char elem){
 		element =elem;
 	}
