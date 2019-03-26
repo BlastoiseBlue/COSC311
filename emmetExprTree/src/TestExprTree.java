@@ -12,8 +12,8 @@ class TestExprTree
 {
     public static void main(String args[]) throws IOException 
     {
-        ExprTree testExpression = new ExprTree( );    // Test expression
-        ExprTree assignExpression = new ExprTree( );  // Test copying ExprTree
+        ExprTree testExpression = new ExprTree("+12");    // Test expression
+        ExprTree assignExpression = new ExprTree(testExpression);  // Test copying ExprTree
         
         System.out.println( );
         System.out.print("Enter an expression in prefix form : ");
@@ -22,27 +22,27 @@ class TestExprTree
         testExpression.showStructure( );
         testExpression.expression( );
         System.out.println(" = " + testExpression.evaluate( ));
-
-//1     // Test the copy constructor.   (In-lab Exercise 1)
-//1     System.out.println("Copy using a Copy Constructor");
-//1     assignExpression = new ExprTree(testExpression);
-//1     dummy(assignExpression);
-//1     System.out.println("Original ExprTree is:");
-//1     testExpression.showStructure();
-//1                 
-//1     System.out.println("\nversus Cloning");
-//1     assignExpression = (ExprTree)testExpression.clone();
-//1     dummy(assignExpression);
-//1     System.out.println("Original ExprTree is:");
-//1     testExpression.showStructure();
-
-//2     // Test the commute operation.  (In-lab Exercise 2)
-//2     testExpression.commute();
-//2     System.out.println( );
-//2     System.out.println("Fully commuted tree: ");
-//2     testExpression.showStructure();
-//2     testExpression.expression();
-//2     System.out.println(" = " + testExpression.evaluate());
+    
+        // Test the copy constructor.   (In-lab Exercise 1)
+        System.out.println("Copy using a Copy Constructor");
+        assignExpression = new ExprTree(testExpression);
+        dummy(assignExpression);
+        System.out.println("Original ExprTree is:");
+        testExpression.showStructure();
+    
+        System.out.println("\nversus Cloning");
+        assignExpression = (ExprTree)testExpression.clone();
+        dummy(assignExpression);
+        System.out.println("Original ExprTree is:");
+        testExpression.showStructure();
+    
+//        // Test the commute operation.  (In-lab Exercise 2)
+//        testExpression.commute();
+//        System.out.println( );
+//        System.out.println("Fully commuted tree: ");
+//        testExpression.showStructure();
+//        testExpression.expression();
+//        System.out.println(" = " + testExpression.evaluate());
         
         System.out.println( );
         System.out.println("Clear the tree");

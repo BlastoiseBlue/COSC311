@@ -61,7 +61,7 @@ public class ExprTree implements Cloneable{
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
 		buildSub(root,buffer);
 	}
-	public void buildSub(TreeNode n, ByteArrayInputStream b){
+	private void buildSub(TreeNode n, ByteArrayInputStream b){
 		n.setElement((char) b.read());
 		if(Character.isDigit(n.getElement())){
 			n.setLeft(null);
@@ -74,10 +74,52 @@ public class ExprTree implements Cloneable{
 			buildSub(n.getRight(),b);
 		}
 	}
-//	public void expression ( )  // Output expression in infix form
-//	{}
-//	public float evaluate ( )   // Evaluate expression
-//	{}
+	/**
+	 *  This is a helper function for build().  You needn't use this approach in your own
+	 *  implementation.
+	 *  @param  prefixString  The argument initially consists of the prefix notation of an expression.
+	 *      SIDE-EFFECT:the state of this param will be changed as it is used.
+	 **/
+	private TreeNode buildSub ( ByteArrayInputStream prefixString )  throws IOException
+	// Recursive partner of the build() method. Builds a subtree and
+	// returns the root of the tree.
+	//
+	{
+		root.setElement((char) prefixString.read());
+		root.setLeft(Character.isDigit(root.getElement()) ?null:buildSub(prefixString));
+		root.setRight(Character.isDigit(root.getElement())?null:buildSub(prefixString));
+		return root;
+	}
+	public void expression ( )  // Output expression in infix form
+	{
+		System.out.println(expressionSub((ExprTreeNode) root));
+	}
+	private String expressionSub(ExprTreeNode n){
+		String s = "";
+		if(n.getLeft()!=null)s.concat(expressionSub((ExprTreeNode) n.getLeft()));
+		s.concat(Character.toString(n.getElement()));
+		if(n.getRight()!=null)s.concat(expressionSub((ExprTreeNode)n.getRight()));
+		return s;
+	}
+	public float evaluate ( )   // Evaluate expression
+	{
+		return evalSub((ExprTreeNode) root);
+	}
+	private float evalSub(ExprTreeNode n){
+		if(Character.isDigit(n.getElement()))return (((float)(n.getElement())-48));
+		else{
+			switch (n.getElement()){
+				case '+':
+					return (evalSub((ExprTreeNode) n.getLeft())+evalSub((ExprTreeNode) n.getRight()));
+				case '-':
+					return (evalSub((ExprTreeNode)n.getLeft())-evalSub((ExprTreeNode)n.getRight()));
+				case '*':
+					return (evalSub((ExprTreeNode)n.getLeft())*evalSub((ExprTreeNode)n.getRight()));
+				case '/':
+					return (evalSub((ExprTreeNode)n.getLeft())/evalSub((ExprTreeNode)n.getRight()));
+			}
+		}throw new Error("Cannot evaluate");
+	}
 	public void clear ( )   // Clear tree
 	{
 		root=null;
@@ -137,17 +179,6 @@ public class ExprTree implements Cloneable{
 			showSub(left, level+1);                 // Output left subtree
 		}
 	}
-	/**
-	 *  This is a helper function for build().  You needn't use this approach in your own
-	 *  implementation.
-	 *  @param  prefixString  The argument initially consists of the prefix notation of an expression.
-	 *      SIDE-EFFECT:the state of this param will be changed as it is used.
-	 **/
-//	private TreeNode buildSub ( ByteArrayInputStream prefixString )  throws IOException
-//	// Recursive partner of the build() method. Builds a subtree and
-//	// returns the root of the tree.
-//	//
-//	{}
 	
 	// -- Insert the definition of the rest of
 	// -- the recursive partners of the public methods below.
