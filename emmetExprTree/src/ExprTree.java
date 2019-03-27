@@ -4,9 +4,7 @@
 import sun.reflect.generics.tree.Tree;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class ExprTree implements Cloneable{
 	// Data member
