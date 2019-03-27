@@ -73,7 +73,9 @@ public class ExprTree implements Cloneable{
 		buildSub(root,buffer);
 	}
 	private void buildSub(TreeNode n, ByteArrayInputStream b){
-		n.setElement((char) b.read());
+		do{
+			n.setElement((char) b.read());
+		}while(Character.isWhitespace(n.getElement()));
 		if(Character.isDigit(n.getElement())){
 			n.setLeft(null);
 			n.setRight(null);
@@ -96,7 +98,9 @@ public class ExprTree implements Cloneable{
 	// returns the root of the tree.
 	//
 	{
-		root.setElement((char) prefixString.read());
+		do {
+			root.setElement((char) prefixString.read());
+		}while (Character.isWhitespace(root.getElement()));
 		root.setLeft(Character.isDigit(root.getElement()) ?null:buildSub(prefixString));
 		root.setRight(Character.isDigit(root.getElement())?null:buildSub(prefixString));
 		return root;
