@@ -49,5 +49,5 @@ public interface TreeNode
 	 * Recursively clears all children of this node
 	 */
 	void clear();
-	Object clone();
+	//Object clone();
 }

@@ -104,21 +104,21 @@ public class ExprTree implements Cloneable{
 	/**
 	 *  This is a helper function for build().  You needn't use this approach in your own
 	 *  implementation.
-	 *  @param  prefixString  The argument initially consists of the prefix notation of an expression.
+	 *  //@param  prefixString  The argument initially consists of the prefix notation of an expression.
 	 *      SIDE-EFFECT:the state of this param will be changed as it is used.
 	 **/
-	private TreeNode buildSub ( ByteArrayInputStream prefixString )  throws IOException
-	// Recursive partner of the build() method. Builds a subtree and
-	// returns the root of the tree.
-	//
-	{
-		do {
-			root.setElement((char) prefixString.read());
-		}while (Character.isWhitespace(root.getElement()));
-		root.setLeft(Character.isDigit(root.getElement()) ?null:buildSub(prefixString));
-		root.setRight(Character.isDigit(root.getElement())?null:buildSub(prefixString));
-		return root;
-	}
+//	private TreeNode buildSub ( ByteArrayInputStream prefixString )  throws IOException
+//	// Recursive partner of the build() method. Builds a subtree and
+//	// returns the root of the tree.
+//	//
+//	{
+//		do {
+//			root.setElement((char) prefixString.read());
+//		}while (Character.isWhitespace(root.getElement()));
+//		root.setLeft(Character.isDigit(root.getElement()) ?null:buildSub(prefixString));
+//		root.setRight(Character.isDigit(root.getElement())?null:buildSub(prefixString));
+//		return root;
+//	}
 	public void expression ( )  // Output expression in infix form
 	{
 		expressionSub((ExprTreeNode) root);

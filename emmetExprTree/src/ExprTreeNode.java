@@ -3,7 +3,7 @@ import java.io.ByteArrayInputStream;
 /**
  * @author Emmet Stanevich
  */
-class ExprTreeNode implements TreeNode, Cloneable{
+class ExprTreeNode implements TreeNode{
 	private char element;
 	private TreeNode left, right;
 	ExprTreeNode(char elem, TreeNode l, TreeNode r){
@@ -51,14 +51,14 @@ class ExprTreeNode implements TreeNode, Cloneable{
 		right=null;
 		
 	}
-	public Object clone(){
-		try{
-			TreeNode c = (TreeNode) super.clone();
-			c.setLeft((TreeNode) getLeft().clone());
-			c.setRight((TreeNode) getRight().clone());
-			return c;
-		}catch(CloneNotSupportedException e){
-			throw new InternalError("\nThis class does not implement Cloneable");
-		}
-	}
+//	public Object clone(){
+//		try{
+//			TreeNode c = (TreeNode) super.clone();
+//			c.setLeft((TreeNode) getLeft().clone());
+//			c.setRight((TreeNode) getRight().clone());
+//			return c;
+//		}catch(CloneNotSupportedException e){
+//			throw new InternalError("\nThis class does not implement Cloneable");
+//		}
+//	}
 }
