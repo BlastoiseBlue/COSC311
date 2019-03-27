@@ -44,13 +44,13 @@ class ExprTreeNode implements TreeNode{
 				getLeft()==null?null:getLeft().deepCopy(),
 				getRight()==null?null:getRight().deepCopy());
 	}
-	public void clear(){
-		left.clear();
-		left=null;
-		right.clear();
-		right=null;
-		
-	}
+//	public void clear(){
+//		left.clear();
+//		left=null;
+//		right.clear();
+//		right=null;
+//
+//	}
 //	public Object clone(){
 //		try{
 //			TreeNode c = (TreeNode) super.clone();
