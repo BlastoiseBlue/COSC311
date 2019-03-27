@@ -13,9 +13,19 @@ public class ExprTree implements Cloneable{
 	private TreeNode root;  // Reference to the root node
 	
 	// Constructor
+	
+	/**
+	 * Constructor for ExprTree using a predefined node
+	 * @param r The node to use for the root
+	 */
 	public ExprTree (ExprTreeNode r){
 		root=r;
 	}
+	
+	/**
+	 * Constructor for ExprTree using a string
+	 * @param s
+	 */
 	public ExprTree(String s){
 		root=new ExprTreeNode();
 		build(s);
@@ -97,17 +107,15 @@ public class ExprTree implements Cloneable{
 		System.out.println();
 	}
 	private void expressionSub(ExprTreeNode n){
-		//String s = "";
 		if(n.getLeft()!=null) {
 			System.out.print("(");
 			expressionSub((ExprTreeNode)n.getLeft());
-		}// else
+		}
 		System.out.print(n.getElement());
 		if(n.getRight()!=null) {
 			expressionSub((ExprTreeNode)n.getRight());
 			System.out.print(")");
 		}
-		//return s;
 	}
 	public float evaluate ( )   // Evaluate expression
 	{

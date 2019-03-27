@@ -13,14 +13,9 @@ class ExprTreeNode implements TreeNode, Cloneable{
 	}
 	ExprTreeNode(){
 	}
-	//		ExprTreeNode(char elem, char elemL, char elemR)
 	ExprTreeNode(char elem){
 		new ExprTreeNode(elem,null,null);
 	}
-//	public void buildSub(ByteArrayInputStream b){
-//		setElement((char) b.read());
-//		if()
-//	}
 	public boolean isLeaf(){
 		return(left==null&&right==null);
 	}
