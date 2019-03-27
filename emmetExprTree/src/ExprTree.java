@@ -1,5 +1,6 @@
 /**
  * @author Emmet Stanevich
+ * This program will be used to build an expression tree using a string, a node, or an extsitng expression tree
  */
 import sun.reflect.generics.tree.Tree;
 
@@ -31,8 +32,12 @@ public class ExprTree implements Cloneable{
 	
 	// In-lab 1
 	// Remove the surrounding comment markers when ready to implement
-    
-    public ExprTree ( ExprTree valueTree ){
+	
+	/**
+	 * Copy constructor for ExprTree
+	 * @param valueTree The tree to be copied
+	 */
+	public ExprTree ( ExprTree valueTree ){
 		valueTree.clone();
 		this.root=valueTree.root.deepCopy();
     }
@@ -65,11 +70,22 @@ public class ExprTree implements Cloneable{
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
 		buildSub(root,buffer);
 	}
+	
+	/**
+	 * Builds an ExprTree from a string, usually hardcoded
+	 * @param s The string to be converted into an expression tree
+	 */
 	public void build (String s){
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
 		buildSub(root,buffer);
 	}
+	
+	/**
+	 * Helper function fpr build()
+	 * @param n The root of the subtree
+	 * @param b The buffer to be read from
+	 */
 	private void buildSub(TreeNode n, ByteArrayInputStream b){
 		do{
 			n.setElement((char) b.read());
@@ -119,10 +135,21 @@ public class ExprTree implements Cloneable{
 			System.out.print(")");
 		}
 	}
+	
+	/**
+	 * Travels through the expression tree, evaluating it
+	 * @return The result of the evaluation
+	 */
 	public float evaluate ( )   // Evaluate expression
 	{
 		return evalSub((ExprTreeNode) root);
 	}
+	
+	/**
+	 * Recursively evaluates a subtree
+	 * @param n The root of the subtree to be evaluated
+	 * @return The evaluation of the subtree
+	 */
 	private float evalSub(ExprTreeNode n){
 		if(Character.isDigit(n.getElement()))return (((float)(n.getElement())-48));
 		else{
@@ -138,6 +165,10 @@ public class ExprTree implements Cloneable{
 			}
 		}throw new Error("Cannot evaluate");
 	}
+	
+	/**
+	 * Clears the tree by setting the root to null
+	 */
 	public void clear ( )   // Clear tree
 	{
 		root=null;
@@ -164,7 +195,12 @@ public class ExprTree implements Cloneable{
     {
     	root=commuteSub((ExprTreeNode) root);
     }
-    
+	
+	/**
+	 * Generates and returns a copy of the subtree, recursively commuted
+	 * @param n The root of the subtree to be commuted
+	 * @return The commuted subtree
+	 */
 	private ExprTreeNode commuteSub(ExprTreeNode n){
 		ExprTreeNode newNode=new ExprTreeNode(n.getElement(),null,null);
 		if(n.getLeft()!=null)newNode.setRight(commuteSub((ExprTreeNode) n.getLeft()));
