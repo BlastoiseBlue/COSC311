@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * @author Emmet Stanevich
+ * This program is a variation on ExprTree.java, except it now works with logic gates rather than numbers
  */
 public class LogicTree implements Cloneable
 //		extends ExprTree
@@ -25,6 +26,11 @@ public class LogicTree implements Cloneable
 			throw new InternalError("\nThis class does not implement Cloneable");
 		}
 	}
+	
+	/**
+	 * Evaluates the argument stored within the tree
+	 * @return The end result of the evaluation
+	 */
 	public boolean evaluate(){
 		return evalSub(root);
 	}
@@ -45,12 +51,21 @@ public class LogicTree implements Cloneable
 		}throw new Error("Cannot evaluate");
 	}
 	
+	/**
+	 * Creates a logic tree out of user input
+	 * @throws IOException
+	 */
 	public void build() throws IOException {
 		Scanner kbd=new Scanner(System.in);
 		byte[] input=kbd.nextLine().getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
 		buildSub(root,buffer);
 	}
+	
+	/**
+	 * Creates a logic tree from a supplied string
+	 * @param s
+	 */
 	public void build(String s){
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
@@ -75,9 +90,10 @@ public class LogicTree implements Cloneable
 			buildSub((LogicTreeNode) n.getLeft(),b);
 			buildSub((LogicTreeNode) n.getRight(),b);
 		}
-	}/**
- * Clears the tree by setting the root to null
- */
+	}
+	/**
+    * Clears the tree by setting the root to null
+    */
 public void clear ( )   // Clear tree
 {
 	root=null;
