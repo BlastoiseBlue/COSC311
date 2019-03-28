@@ -1,5 +1,7 @@
 /**
  * @author Emmet Stanevich
+ * This class is to be used by the LogicTree class
+ * Created on 3/27/19
  */
 public class LogicTreeNode implements TreeNode {
 	private char element;
@@ -7,6 +9,13 @@ public class LogicTreeNode implements TreeNode {
 	LogicTreeNode(char elem){
 		element=elem;
 	}
+	
+	/**
+	 * Default constructor
+	 * @param elem The data to be stored in the node
+	 * @param l The node's left child
+	 * @param r The node's right child
+	 */
 	LogicTreeNode(char elem, TreeNode l, TreeNode r){
 		element= elem;
 		left=l;
@@ -18,9 +27,17 @@ public class LogicTreeNode implements TreeNode {
 	LogicTreeNode(byte elem,TreeNode l, TreeNode r){
 		new LogicTreeNode(elem,l,r);
 	}
+	
+	/**
+	 * No-argument constructor, useful for buildSub
+	 */
 	LogicTreeNode(){
-		//super();
 	}
+	
+	/**
+	 * Sets the element of an existing node
+	 * @param elem The new data to store in this node
+	 */
 	public void setElement(char elem){
 		element =elem;
 	}
@@ -46,6 +63,11 @@ public class LogicTreeNode implements TreeNode {
 		right=node;
 		return right;
 	}
+	
+	/**
+	 * Deep copy method for nodes
+	 * @return A recursively generated copy of this node, with copies of its children, their children, etc.
+	 */
 	public LogicTreeNode deepCopy(){
 		return new LogicTreeNode(getElement(),
 				getLeft()==null?null:getLeft().deepCopy(),

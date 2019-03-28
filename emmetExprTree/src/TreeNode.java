@@ -1,6 +1,7 @@
 /**
  * @author Matt Evett
- * @version 1.0
+ * Modified by Emmet Stanevich
+ * @version 1.1
  */
 public interface TreeNode
 {

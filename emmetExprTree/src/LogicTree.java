@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * @author Emmet Stanevich
  * This program is a variation on ExprTree.java, except it now works with logic gates rather than numbers
+ * Created on 3/27/19
  */
 public class LogicTree implements Cloneable
 //		extends ExprTree
@@ -134,7 +135,7 @@ public void clear ( )   // Clear tree
 	// Remove the surrounding comment markers when ready to implement
 	public void commute ( )  // Commute all subexpr.
 	{
-		root=commuteSub((LogicTreeNode) root);
+		root=commuteSub(root);
 	}
 	
 	/**
