@@ -22,7 +22,7 @@ public class LogicTreeNode implements TreeNode {
 		right=r;
 	}
 	LogicTreeNode(byte elem){
-		new LogicTreeNode((byte) elem);
+		new LogicTreeNode(elem);
 	}
 	LogicTreeNode(byte elem,TreeNode l, TreeNode r){
 		new LogicTreeNode(elem,l,r);

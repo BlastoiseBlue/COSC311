@@ -1,5 +1,3 @@
-//import java.io.ByteArrayInputStream;
-
 /**
  * @author Emmet Stanevich
  * This program is to be used by the ExprTree class
@@ -34,9 +32,6 @@ class ExprTreeNode implements TreeNode{
 	ExprTreeNode(char elem){
 		new ExprTreeNode(elem,null,null);
 	}
-//	public boolean isLeaf(){
-//		return(left==null&&right==null);
-//	}
 	public void setElement(char elem){
 		element =elem;
 	}
@@ -67,21 +62,4 @@ class ExprTreeNode implements TreeNode{
 				getLeft()==null?null:getLeft().deepCopy(),
 				getRight()==null?null:getRight().deepCopy());
 	}
-//	public void clear(){
-//		left.clear();
-//		left=null;
-//		right.clear();
-//		right=null;
-//
-//	}
-//	public Object clone(){
-//		try{
-//			TreeNode c = (TreeNode) super.clone();
-//			c.setLeft((TreeNode) getLeft().clone());
-//			c.setRight((TreeNode) getRight().clone());
-//			return c;
-//		}catch(CloneNotSupportedException e){
-//			throw new InternalError("\nThis class does not implement Cloneable");
-//		}
-//	}
 }
