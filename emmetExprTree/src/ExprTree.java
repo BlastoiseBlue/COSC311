@@ -38,7 +38,7 @@ public class ExprTree implements Cloneable{
 	 */
 	public ExprTree ( ExprTree valueTree ){
 		valueTree.clone();
-		this.root=valueTree.root.deepCopy();
+		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
     }
 	
 	/**
@@ -48,7 +48,7 @@ public class ExprTree implements Cloneable{
 	public Object clone(){
 		try {
 			ExprTree c = (ExprTree) super.clone();
-			c.root=root.deepCopy();
+			c.root=root==null?null:root.deepCopy();
 			return c;
 		}catch (CloneNotSupportedException e){
 			throw new InternalError("\nThis class does not implement Cloneable");
@@ -197,7 +197,7 @@ public class ExprTree implements Cloneable{
 	// Remove the surrounding comment markers when ready to implement
      public void commute ( )  // Commute all subexpr.
     {
-    	root=commuteSub((ExprTreeNode) root);
+    	root=root==null?null:commuteSub((ExprTreeNode) root);
     }
 	
 	/**
