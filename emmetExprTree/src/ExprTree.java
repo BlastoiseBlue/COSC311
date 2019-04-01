@@ -65,14 +65,15 @@ public class ExprTree implements Cloneable{
 	public void build () throws IOException // Build tree from prefix expression
 	{
 		Scanner kbd=new Scanner(System.in);
-		byte[] input=kbd.nextLine().getBytes();
-		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-		try {
-			buildSub(root, buffer);
-		}catch(Exception e){
-			System.out.println(e);
-			root=null;
-		}
+		String input=kbd.nextLine();
+//		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
+//		try {
+//			buildSub(root, buffer);
+//		}catch(Exception e){
+//			System.out.println(e);
+//			root=null;
+//		}
+		build(input);
 	}
 	
 	/**
