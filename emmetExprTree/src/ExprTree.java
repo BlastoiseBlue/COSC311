@@ -24,7 +24,7 @@ public class ExprTree implements Cloneable{
 	 * Constructor for ExprTree using a string
 	 * @param s
 	 */
-	public ExprTree(String s){
+	public ExprTree(String s) throws IOException {
 		root=new ExprTreeNode();
 		build(s);
 	}
@@ -40,6 +40,10 @@ public class ExprTree implements Cloneable{
 		valueTree.clone();
 		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
     }
+	
+	public ExprTree() {
+		root=new ExprTreeNode();
+	}
 	
 	/**
 	 * Clones the tree
@@ -65,7 +69,9 @@ public class ExprTree implements Cloneable{
 	public void build () throws IOException // Build tree from prefix expression
 	{
 		Scanner kbd=new Scanner(System.in);
+		//if(!kbd.hasNextLine())throw new IOException("Input is empty");
 		String input=kbd.nextLine();
+		//if(input.equals(""))throw new IOException("Input is empty");
 //		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
 //		try {
 //			buildSub(root, buffer);
@@ -73,6 +79,7 @@ public class ExprTree implements Cloneable{
 //			System.out.println(e);
 //			root=null;
 //		}
+		//if(input==null)throw new IOException("Input is empty");
 		build(input);
 	}
 	
@@ -80,7 +87,8 @@ public class ExprTree implements Cloneable{
 	 * Builds an ExprTree from a string, usually hardcoded
 	 * @param s The string to be converted into an expression tree
 	 */
-	public void build (String s){
+	public void build (String s) throws IOException {
+		if(s.equals(""))throw new IOException("Input is empty");
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
 		try {
