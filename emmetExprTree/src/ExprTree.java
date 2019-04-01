@@ -67,7 +67,12 @@ public class ExprTree implements Cloneable{
 		Scanner kbd=new Scanner(System.in);
 		byte[] input=kbd.nextLine().getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-		buildSub(root,buffer);
+		try {
+			buildSub(root, buffer);
+		}catch(Exception e){
+			System.out.println(e);
+			root=null;
+		}
 	}
 	
 	/**
@@ -77,7 +82,12 @@ public class ExprTree implements Cloneable{
 	public void build (String s){
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-		buildSub(root,buffer);
+		try {
+			buildSub(root, buffer);
+		}catch(Exception e){
+			System.out.println(e);
+			root=null;
+		}
 	}
 	
 	/**
@@ -85,27 +95,35 @@ public class ExprTree implements Cloneable{
 	 * @param n The root of the subtree
 	 * @param b The buffer to be read from
 	 */
-	private void buildSub(TreeNode n, ByteArrayInputStream b){
+	private void buildSub(TreeNode n, ByteArrayInputStream b) throws Exception{
+		int x;
 		do{
 			n.setElement((char) b.read());
+			x=(int)(n.getElement());
+			
 		}while(Character.isWhitespace(n.getElement()));
 		if(Character.isDigit(n.getElement())){
 			n.setLeft(null);
 			n.setRight(null);
 		}
-		else{
+		else if(x==42||x==43||x==45||x==47){
 			n.setLeft(new ExprTreeNode());
 			n.setRight(new ExprTreeNode());
 			buildSub(n.getLeft(),b);
 			buildSub(n.getRight(),b);
-		}
+		}else throw new Exception("Invalid input: "+n.getElement());
 	}
 	public void expression ( )  // Output expression in infix form
 	{
-		expressionSub((ExprTreeNode) root);
-		System.out.println();
+		try {
+			expressionSub((ExprTreeNode) root);
+			System.out.println();
+		}catch (Exception e){
+			System.out.println("Expression Error: ");
+		}
 	}
-	private void expressionSub(ExprTreeNode n){
+	private void expressionSub(ExprTreeNode n) throws Exception{
+		if(n==null)throw new Exception("Root in null");
 		if(n.getLeft()!=null) {
 			System.out.print("(");
 			expressionSub((ExprTreeNode)n.getLeft());
@@ -121,9 +139,14 @@ public class ExprTree implements Cloneable{
 	 * Travels through the expression tree, evaluating it
 	 * @return The result of the evaluation
 	 */
-	public float evaluate ( )   // Evaluate expression
+	public String evaluate ( )   // Evaluate expression
 	{
-		return evalSub((ExprTreeNode) root);
+		try {
+			return String.valueOf(evalSub((ExprTreeNode) root));
+		}catch(Exception e){
+			//System.out.println(e);
+			return String.valueOf(e);
+		}
 	}
 	
 	/**
@@ -131,7 +154,7 @@ public class ExprTree implements Cloneable{
 	 * @param n The root of the subtree to be evaluated
 	 * @return The evaluation of the subtree
 	 */
-	private float evalSub(ExprTreeNode n){
+	private float evalSub(ExprTreeNode n) throws Exception{
 		if(Character.isDigit(n.getElement()))return (((float)(n.getElement())-48));
 		else{
 			switch (n.getElement()){
@@ -144,7 +167,7 @@ public class ExprTree implements Cloneable{
 				case '/':
 					return (evalSub((ExprTreeNode)n.getLeft())/evalSub((ExprTreeNode)n.getRight()));
 			}
-		}throw new Error("Cannot evaluate");
+		}throw new Exception("Cannot evaluate");
 	}
 	
 	/**
