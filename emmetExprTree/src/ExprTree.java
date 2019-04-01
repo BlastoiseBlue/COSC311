@@ -1,10 +1,10 @@
+import java.io.*;
+import java.util.Scanner;
 /**
  * @author Emmet Stanevich
  * This program will be used to build an expression tree using a string, a node, or an extsitng expression tree
  * Created on 3/25/19
  */
-import java.io.*;
-import java.util.Scanner;
 
 public class ExprTree implements Cloneable{
 	// Data member
