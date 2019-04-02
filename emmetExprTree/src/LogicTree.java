@@ -16,12 +16,12 @@ public class LogicTree implements Cloneable
 	}
 	LogicTree(LogicTree valueTree){
 		valueTree.clone();
-		this.root= valueTree.root.deepCopy();
+		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
 	}
 	public Object clone(){
 		try {
 			LogicTree c = (LogicTree) super.clone();
-			c.root= root.deepCopy();
+			c.root=root==null?null:root.deepCopy();
 			return c;
 		}catch (CloneNotSupportedException e){
 			throw new InternalError("\nThis class does not implement Cloneable");
@@ -33,7 +33,11 @@ public class LogicTree implements Cloneable
 	 * @return The end result of the evaluation
 	 */
 	public boolean evaluate(){
-		return evalSub(root);
+		try {
+			return evalSub(root);
+		}catch(Exception e){
+			return false;
+		}
 	}
 	private boolean evalSub(LogicTreeNode n){
 		if(Character.isDigit(n.getElement())){
@@ -56,25 +60,33 @@ public class LogicTree implements Cloneable
 	 * Creates a logic tree out of user input
 	 * @throws IOException
 	 */
-	public void build() throws IOException {
+	public void build ()  // Build tree from prefix expression
+	{
 		Scanner kbd=new Scanner(System.in);
-		byte[] input=kbd.nextLine().getBytes();
-		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-		buildSub(root,buffer);
+		String input=kbd.nextLine();
+		build(input);
 	}
 	
 	/**
 	 * Creates a logic tree from a supplied string
 	 * @param s
 	 */
-	public void build(String s){
+	public void build (String s) {
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-		buildSub(root,buffer);
+		try {
+			buildSub(root, buffer);
+		}catch(IOException e){
+			System.out.println(e);
+			root=null;
+		}
 	}
-	private void buildSub(LogicTreeNode n, ByteArrayInputStream b){
+	private void buildSub(LogicTreeNode n, ByteArrayInputStream b) throws IOException {
+		byte x;
 		do{
 			n.setElement((char) b.read());
+			x=(byte)n.getElement();
+			if(x==-1)throw new IOException("Too few operands!");
 		}while(Character.isWhitespace(n.getElement()));
 		if(Character.isDigit(n.getElement())){
 			n.setLeft(null);
@@ -85,12 +97,12 @@ public class LogicTree implements Cloneable
 			n.setRight(new LogicTreeNode());
 			buildSub((LogicTreeNode) n.getRight(),b);
 		}
-		else{
+		else if(x==42||x==43){
 			n.setLeft(new LogicTreeNode());
 			n.setRight(new LogicTreeNode());
 			buildSub((LogicTreeNode) n.getLeft(),b);
 			buildSub((LogicTreeNode) n.getRight(),b);
-		}
+		}else throw new IOException("Invalid input: "+n.getElement());
 	}
 	/**
     * Clears the tree by setting the root to null
@@ -101,10 +113,16 @@ public void clear ( )   // Clear tree
 }
 	public void expression ( )  // Output expression in infix form
 	{
-		expressionSub(root);
-		System.out.println();
+		try {
+			expressionSub(root);
+			System.out.println();
+		}catch(Exception e){
+			System.out.println("Expression Error: "+e);
+		}
 	}
-	private void expressionSub(LogicTreeNode n){
+	private void expressionSub(LogicTreeNode n) throws Exception{
+		if(n==null)throw new Exception("Root is null");
+		if(n.getElement()=='-'&&Character.isDigit(n.getRight().getElement()))System.out.print("(");
 		if(n.getLeft()!=null) {
 			System.out.print("(");
 			expressionSub((LogicTreeNode) n.getLeft());
@@ -135,7 +153,7 @@ public void clear ( )   // Clear tree
 	// Remove the surrounding comment markers when ready to implement
 	public void commute ( )  // Commute all subexpr.
 	{
-		root=commuteSub(root);
+		root=root==null?null:commuteSub(root);
 	}
 	
 	/**

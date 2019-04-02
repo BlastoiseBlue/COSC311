@@ -24,7 +24,7 @@ public class ExprTree implements Cloneable{
 	 * Constructor for ExprTree using a string
 	 * @param s
 	 */
-	public ExprTree(String s) throws IOException {
+	public ExprTree(String s) {
 		root=new ExprTreeNode();
 		build(s);
 	}
@@ -66,20 +66,10 @@ public class ExprTree implements Cloneable{
 	 *  Get a string representing the prefix notation form of an expression from the console.
 	 *  Create a expression tree representing that string.
 	 **/
-	public void build () throws IOException // Build tree from prefix expression
+	public void build ()  // Build tree from prefix expression
 	{
 		Scanner kbd=new Scanner(System.in);
-		//if(!kbd.hasNextLine())throw new IOException("Input is empty");
 		String input=kbd.nextLine();
-		//if(input.equals(""))throw new IOException("Input is empty");
-//		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-//		try {
-//			buildSub(root, buffer);
-//		}catch(Exception e){
-//			System.out.println(e);
-//			root=null;
-//		}
-		//if(input==null)throw new IOException("Input is empty");
 		build(input);
 	}
 	
@@ -87,13 +77,12 @@ public class ExprTree implements Cloneable{
 	 * Builds an ExprTree from a string, usually hardcoded
 	 * @param s The string to be converted into an expression tree
 	 */
-	public void build (String s) throws IOException {
-		if(s.equals(""))throw new IOException("Input is empty");
+	public void build (String s) {
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
 		try {
 			buildSub(root, buffer);
-		}catch(Exception e){
+		}catch(IOException e){
 			System.out.println(e);
 			root=null;
 		}
@@ -104,11 +93,12 @@ public class ExprTree implements Cloneable{
 	 * @param n The root of the subtree
 	 * @param b The buffer to be read from
 	 */
-	private void buildSub(TreeNode n, ByteArrayInputStream b) throws Exception{
-		int x;
+	private void buildSub(TreeNode n, ByteArrayInputStream b) throws IOException{
+		byte x;
 		do{
 			n.setElement((char) b.read());
-			x=(int)(n.getElement());
+			x=(byte)(n.getElement());
+			if(x==-1)throw new IOException("Too few operands!");
 			
 		}while(Character.isWhitespace(n.getElement()));
 		if(Character.isDigit(n.getElement())){
@@ -120,7 +110,7 @@ public class ExprTree implements Cloneable{
 			n.setRight(new ExprTreeNode());
 			buildSub(n.getLeft(),b);
 			buildSub(n.getRight(),b);
-		}else throw new Exception("Invalid input: "+n.getElement());
+		}else throw new IOException("Invalid input: "+n.getElement());
 	}
 	public void expression ( )  // Output expression in infix form
 	{
@@ -128,11 +118,11 @@ public class ExprTree implements Cloneable{
 			expressionSub((ExprTreeNode) root);
 			System.out.println();
 		}catch (Exception e){
-			System.out.println("Expression Error: ");
+			System.out.println("Expression Error: "+e);
 		}
 	}
 	private void expressionSub(ExprTreeNode n) throws Exception{
-		if(n==null)throw new Exception("Root in null");
+		if(n==null)throw new Exception("Root is null");
 		if(n.getLeft()!=null) {
 			System.out.print("(");
 			expressionSub((ExprTreeNode)n.getLeft());
