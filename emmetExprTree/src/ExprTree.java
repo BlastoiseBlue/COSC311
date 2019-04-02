@@ -110,6 +110,7 @@ public class ExprTree implements Cloneable{
 			n.setRight(new ExprTreeNode());
 			buildSub(n.getLeft(),b);
 			buildSub(n.getRight(),b);
+			if(x==47&&n.getRight().getElement()=='0')throw new IOException("Divide by Zero");
 		}else throw new IOException("Invalid input: "+n.getElement());
 	}
 	public void expression ( )  // Output expression in infix form
@@ -143,7 +144,6 @@ public class ExprTree implements Cloneable{
 		try {
 			return String.valueOf(evalSub((ExprTreeNode) root));
 		}catch(Exception e){
-			//System.out.println(e);
 			return String.valueOf(e);
 		}
 	}
@@ -164,7 +164,9 @@ public class ExprTree implements Cloneable{
 				case '*':
 					return (evalSub((ExprTreeNode)n.getLeft())*evalSub((ExprTreeNode)n.getRight()));
 				case '/':
-					return (evalSub((ExprTreeNode)n.getLeft())/evalSub((ExprTreeNode)n.getRight()));
+					if(evalSub((ExprTreeNode) n.getRight())==0)throw new Exception("Divide by Zero");
+					else
+						return (evalSub((ExprTreeNode)n.getLeft())/evalSub((ExprTreeNode)n.getRight()));
 			}
 		}throw new Exception("Cannot evaluate");
 	}

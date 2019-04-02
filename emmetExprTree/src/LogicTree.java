@@ -7,9 +7,7 @@ import java.util.Scanner;
  * This program is a variation on ExprTree.java, except it now works with logic gates rather than numbers
  * Created on 3/27/19
  */
-public class LogicTree implements Cloneable
-//		extends ExprTree
-{
+public class LogicTree implements Cloneable{
 	private LogicTreeNode root;
 	LogicTree(LogicTreeNode r){
 		root=r;
@@ -122,7 +120,7 @@ public void clear ( )   // Clear tree
 	}
 	private void expressionSub(LogicTreeNode n) throws Exception{
 		if(n==null)throw new Exception("Root is null");
-		if(n.getElement()=='-'&&Character.isDigit(n.getRight().getElement()))System.out.print("(");
+		if(n.getElement()=='-')System.out.print("(");
 		if(n.getLeft()!=null) {
 			System.out.print("(");
 			expressionSub((LogicTreeNode) n.getLeft());
