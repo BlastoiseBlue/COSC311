@@ -5,9 +5,9 @@ import java.io.*;
 
 class TestLogicTree
 {
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args) throws Exception
 	{
-		LogicTree testExpression = new LogicTree(new LogicTreeNode('+',new LogicTreeNode('1'),new LogicTreeNode('0')));    // Test expression
+		LogicTree testExpression = new LogicTree();    // Test expression
 		LogicTree assignExpression = new LogicTree(testExpression);  // Test copying ExprTree
 		
 		System.out.println( );

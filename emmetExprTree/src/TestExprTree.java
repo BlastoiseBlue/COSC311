@@ -10,7 +10,7 @@ import java.io.*;
 
 class TestExprTree
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws Exception
     {
         ExprTree testExpression = new ExprTree(new ExprTreeNode('+',new ExprTreeNode('1'),new ExprTreeNode('2')));    // Test expression
         ExprTree assignExpression = new ExprTree();  // Test copying ExprTree

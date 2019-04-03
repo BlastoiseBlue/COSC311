@@ -24,7 +24,7 @@ public class ExprTree implements Cloneable{
 	 * Constructor for ExprTree using a string
 	 * @param s
 	 */
-	public ExprTree(String s) {
+	public ExprTree(String s) throws IOException{
 		root=new ExprTreeNode();
 		build(s);
 	}
@@ -36,9 +36,11 @@ public class ExprTree implements Cloneable{
 	 * Copy constructor for ExprTree
 	 * @param valueTree The tree to be copied
 	 */
-	public ExprTree ( ExprTree valueTree ){
+	public ExprTree ( ExprTree valueTree ) throws Exception {
 		valueTree.clone();
-		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
+//		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
+		if(valueTree.root==null)throw new Exception("Error: Empty Tree");
+		else this.root=valueTree.root.deepCopy();
     }
 	
 	public ExprTree() {
@@ -66,7 +68,7 @@ public class ExprTree implements Cloneable{
 	 *  Get a string representing the prefix notation form of an expression from the console.
 	 *  Create a expression tree representing that string.
 	 **/
-	public void build ()  // Build tree from prefix expression
+	public void build () throws IOException // Build tree from prefix expression
 	{
 		Scanner kbd=new Scanner(System.in);
 		String input=kbd.nextLine();
@@ -77,15 +79,15 @@ public class ExprTree implements Cloneable{
 	 * Builds an ExprTree from a string, usually hardcoded
 	 * @param s The string to be converted into an expression tree
 	 */
-	public void build (String s) {
+	public void build (String s) throws IOException{
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-		try {
+//		try {
 			buildSub(root, buffer);
-		}catch(IOException e){
-			System.out.println(e);
-			root=null;
-		}
+//		}catch(IOException e){
+//			System.out.println(e);
+//			root=null;
+//		}
 	}
 	
 	/**
@@ -113,14 +115,14 @@ public class ExprTree implements Cloneable{
 			if(x==47&&n.getRight().getElement()=='0')throw new IOException("Divide by Zero");
 		}else throw new IOException("Invalid input: "+n.getElement());
 	}
-	public void expression ( )  // Output expression in infix form
+	public void expression ( ) throws Exception // Output expression in infix form
 	{
-		try {
+//		try {
 			expressionSub((ExprTreeNode) root);
 			System.out.println();
-		}catch (Exception e){
-			System.out.println("Expression Error: "+e);
-		}
+//		}catch (Exception e){
+//			System.out.println("Expression Error: "+e);
+//		}
 	}
 	private void expressionSub(ExprTreeNode n) throws Exception{
 		if(n==null)throw new Exception("Root is null");
@@ -139,13 +141,13 @@ public class ExprTree implements Cloneable{
 	 * Travels through the expression tree, evaluating it
 	 * @return The result of the evaluation
 	 */
-	public String evaluate ( )   // Evaluate expression
+	public String evaluate ( ) throws Exception  // Evaluate expression
 	{
-		try {
+//		try {
 			return String.valueOf(evalSub((ExprTreeNode) root));
-		}catch(Exception e){
-			return String.valueOf(e);
-		}
+//		}catch(Exception e){
+//			return String.valueOf(e);
+//		}
 	}
 	
 	/**
@@ -196,9 +198,11 @@ public class ExprTree implements Cloneable{
 	
 	// In-lab 2
 	// Remove the surrounding comment markers when ready to implement
-     public void commute ( )  // Commute all subexpr.
+     public void commute ( ) throws Exception // Commute all subexpr.
     {
-    	root=root==null?null:commuteSub((ExprTreeNode) root);
+//    	root=root==null?null:commuteSub((ExprTreeNode) root);
+    	if(root==null)throw new Exception("Error: Empty Tree");
+    	else root=commuteSub((ExprTreeNode)root);
     }
 	
 	/**

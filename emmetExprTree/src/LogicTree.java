@@ -9,12 +9,21 @@ import java.util.Scanner;
  */
 public class LogicTree implements Cloneable{
 	private LogicTreeNode root;
-	LogicTree(LogicTreeNode r){
+	public LogicTree(LogicTreeNode r){
 		root=r;
 	}
-	LogicTree(LogicTree valueTree){
+	public LogicTree(LogicTree valueTree) throws Exception {
 		valueTree.clone();
-		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
+//		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
+		if(valueTree.root==null)throw new Exception("Error: Empty Tree");
+		else this.root=valueTree.root.deepCopy();
+	}
+	public LogicTree(){
+		root=new LogicTreeNode();
+	}
+	public LogicTree(String s)throws IOException{
+		root=new LogicTreeNode();
+		build(s);
 	}
 	public Object clone(){
 		try {
@@ -30,14 +39,14 @@ public class LogicTree implements Cloneable{
 	 * Evaluates the argument stored within the tree
 	 * @return The end result of the evaluation
 	 */
-	public boolean evaluate(){
-		try {
+	public boolean evaluate() throws Exception {
+//		try {
 			return evalSub(root);
-		}catch(Exception e){
-			return false;
-		}
+//		}catch(Exception e){
+//			return false;
+//		}
 	}
-	private boolean evalSub(LogicTreeNode n){
+	private boolean evalSub(LogicTreeNode n) throws Exception {
 		if(Character.isDigit(n.getElement())){
 			if(n.getElement()=='1')return true;
 			else return false;
@@ -51,14 +60,14 @@ public class LogicTree implements Cloneable{
 				case '*':
 					return (evalSub((LogicTreeNode) n.getLeft())&&evalSub((LogicTreeNode) n.getRight()));
 			}
-		}throw new Error("Cannot evaluate");
+		}throw new Exception("Cannot evaluate");
 	}
 	
 	/**
 	 * Creates a logic tree out of user input
 	 * @throws IOException
 	 */
-	public void build ()  // Build tree from prefix expression
+	public void build () throws IOException // Build tree from prefix expression
 	{
 		Scanner kbd=new Scanner(System.in);
 		String input=kbd.nextLine();
@@ -69,15 +78,15 @@ public class LogicTree implements Cloneable{
 	 * Creates a logic tree from a supplied string
 	 * @param s
 	 */
-	public void build (String s) {
+	public void build (String s) throws IOException{
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-		try {
+//		try {
 			buildSub(root, buffer);
-		}catch(IOException e){
-			System.out.println(e);
-			root=null;
-		}
+//		}catch(IOException e){
+//			System.out.println(e);
+//			root=null;
+//		}
 	}
 	private void buildSub(LogicTreeNode n, ByteArrayInputStream b) throws IOException {
 		byte x;
@@ -149,9 +158,11 @@ public void clear ( )   // Clear tree
 	
 	// In-lab 2
 	// Remove the surrounding comment markers when ready to implement
-	public void commute ( )  // Commute all subexpr.
+	public void commute ( ) throws Exception  // Commute all subexpr.
 	{
-		root=root==null?null:commuteSub(root);
+//		root=root==null?null:commuteSub(root);
+		if(root==null)throw new Exception("Error: Empty Tree");
+		else root=commuteSub(root);
 	}
 	
 	/**
