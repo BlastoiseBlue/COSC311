@@ -38,7 +38,6 @@ public class ExprTree implements Cloneable{
 	 */
 	public ExprTree ( ExprTree valueTree ) throws Exception {
 		valueTree.clone();
-//		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
 		if(valueTree.root==null)throw new Exception("Error: Empty Tree");
 		else this.root=valueTree.root.deepCopy();
     }
@@ -82,12 +81,7 @@ public class ExprTree implements Cloneable{
 	public void build (String s) throws IOException{
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-//		try {
 			buildSub(root, buffer);
-//		}catch(IOException e){
-//			System.out.println(e);
-//			root=null;
-//		}
 	}
 	
 	/**
@@ -117,12 +111,8 @@ public class ExprTree implements Cloneable{
 	}
 	public void expression ( ) throws Exception // Output expression in infix form
 	{
-//		try {
 			expressionSub((ExprTreeNode) root);
 			System.out.println();
-//		}catch (Exception e){
-//			System.out.println("Expression Error: "+e);
-//		}
 	}
 	private void expressionSub(ExprTreeNode n) throws Exception{
 		if(n==null)throw new Exception("Root is null");
@@ -143,11 +133,7 @@ public class ExprTree implements Cloneable{
 	 */
 	public String evaluate ( ) throws Exception  // Evaluate expression
 	{
-//		try {
 			return String.valueOf(evalSub((ExprTreeNode) root));
-//		}catch(Exception e){
-//			return String.valueOf(e);
-//		}
 	}
 	
 	/**

@@ -14,7 +14,6 @@ public class LogicTree implements Cloneable{
 	}
 	public LogicTree(LogicTree valueTree) throws Exception {
 		valueTree.clone();
-//		this.root=valueTree.root==null?null:valueTree.root.deepCopy();
 		if(valueTree.root==null)throw new Exception("Error: Empty Tree");
 		else this.root=valueTree.root.deepCopy();
 	}
@@ -40,11 +39,7 @@ public class LogicTree implements Cloneable{
 	 * @return The end result of the evaluation
 	 */
 	public boolean evaluate() throws Exception {
-//		try {
 			return evalSub(root);
-//		}catch(Exception e){
-//			return false;
-//		}
 	}
 	private boolean evalSub(LogicTreeNode n) throws Exception {
 		if(n.getElement()=='1')return true;
@@ -79,12 +74,7 @@ public class LogicTree implements Cloneable{
 	public void build (String s) throws IOException{
 		byte[] input=s.getBytes();
 		ByteArrayInputStream buffer=new ByteArrayInputStream(input);
-//		try {
 			buildSub(root, buffer);
-//		}catch(IOException e){
-//			System.out.println(e);
-//			root=null;
-//		}
 	}
 	private void buildSub(LogicTreeNode n, ByteArrayInputStream b) throws IOException {
 		byte x;
@@ -158,7 +148,6 @@ public void clear ( )   // Clear tree
 	// Remove the surrounding comment markers when ready to implement
 	public void commute ( ) throws Exception  // Commute all subexpr.
 	{
-//		root=root==null?null:commuteSub(root);
 		if(root==null)throw new Exception("Error: Empty Tree");
 		else root=commuteSub(root);
 	}
