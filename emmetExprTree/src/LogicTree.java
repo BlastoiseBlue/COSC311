@@ -47,10 +47,8 @@ public class LogicTree implements Cloneable{
 //		}
 	}
 	private boolean evalSub(LogicTreeNode n) throws Exception {
-		if(Character.isDigit(n.getElement())){
-			if(n.getElement()=='1')return true;
-			else return false;
-		}
+		if(n.getElement()=='1')return true;
+		else if(n.getElement()=='0')return false;
 		else{
 			switch (n.getElement()){
 				case '+':
@@ -95,7 +93,7 @@ public class LogicTree implements Cloneable{
 			x=(byte)n.getElement();
 			if(x==-1)throw new IOException("Too few operands!");
 		}while(Character.isWhitespace(n.getElement()));
-		if(Character.isDigit(n.getElement())){
+		if(n.getElement()=='1'||n.getElement()=='0'){
 			n.setLeft(null);
 			n.setRight(null);
 		}
@@ -109,7 +107,7 @@ public class LogicTree implements Cloneable{
 			n.setRight(new LogicTreeNode());
 			buildSub((LogicTreeNode) n.getLeft(),b);
 			buildSub((LogicTreeNode) n.getRight(),b);
-		}else throw new IOException("Invalid input: "+n.getElement());
+		}else throw new IOException("Invalid input: \""+n.getElement()+"\"");
 	}
 	/**
     * Clears the tree by setting the root to null

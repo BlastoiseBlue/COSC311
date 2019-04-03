@@ -113,7 +113,7 @@ public class ExprTree implements Cloneable{
 			buildSub(n.getLeft(),b);
 			buildSub(n.getRight(),b);
 			if(x==47&&n.getRight().getElement()=='0')throw new IOException("Divide by Zero");
-		}else throw new IOException("Invalid input: "+n.getElement());
+		}else throw new IOException("Invalid input: \""+n.getElement()+"\"");
 	}
 	public void expression ( ) throws Exception // Output expression in infix form
 	{
