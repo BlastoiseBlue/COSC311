@@ -64,6 +64,11 @@ public class PriorityQSorted <T extends Comparable<? super T>> {
 	public T findMin(){
 		return element.get(0);
 	}
+	
+	/**
+	 * Overrides the toString() method
+	 * @return A string containing the contents of the queue in the order in which they would be removed, separated by commas
+	 */
 	public String toString(){
 		String s="";
 		for (T value:element) {

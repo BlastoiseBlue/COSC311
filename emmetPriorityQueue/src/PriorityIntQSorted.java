@@ -43,6 +43,11 @@ public class PriorityIntQSorted {
 			if(element[j]<element[j-1])bubbleUp(j);
 		}
 	}
+	
+	/**
+	 * Overrides the toString() method
+	 * @return A string containing the contents of the queue in the order in which they would be removed, separated by commas
+	 */
 	public String toString(){
 		String s="";
 		for (int value : element) {
