@@ -86,10 +86,14 @@ public class PriorityQUnsorted <T extends Comparable<? super T>>{
 	}
 	public String toString(){
 		String s="";
-		for (T value:element) {
-			s+=(value+", ");
+		ArrayList<T> hold=new ArrayList<>();
+		for (T value:element
+		     ) {
+			hold.add(value);
 		}
+		while(!element.isEmpty())s+=remove()+", ";
 		s=s.replaceAll(", $","");
+		element=hold;
 		return s;
 	}
 }
