@@ -4,12 +4,12 @@
  * This program accepts inputs of ints, adding them to a priority queue
  */
 public class PriorityIntQSorted {
-	private int[] element;
+	private int[] arr;
 	public boolean isEmpty(){
-		return element.length==0;
+		return arr.length==0;
 	}
 	public PriorityIntQSorted(){
-		element=new int[0];
+		arr =new int[0];
 	}
 	
 	/**
@@ -19,9 +19,9 @@ public class PriorityIntQSorted {
 	public void bubbleUp(int index){
 		try {
 			if(index==0)throw new ArrayIndexOutOfBoundsException();
-			int hold = element[index - 1];
-			element[index - 1] = element[index];
-			element[index] = hold;
+			int hold = arr[index - 1];
+			arr[index - 1] = arr[index];
+			arr[index] = hold;
 		}catch (ArrayIndexOutOfBoundsException e){
 			System.out.println(e);
 			System.exit(0);
@@ -33,24 +33,26 @@ public class PriorityIntQSorted {
 	 * @param input The value to be inserted
 	 */
 	public void add(int input){
-		int[] newElem= new int[element.length+1];
-		for (int i = 0;i<element.length; i++) {
-			newElem[i]=element[i];
+		int[] newElem= new int[arr.length+1];
+		for (int i = 0; i< arr.length; i++) {
+			newElem[i]= arr[i];
 		}
-		element=newElem;
-		element[element.length-1]=input;
-		for(int j=element.length-1;j>0;j--){
-			if(element[j]<element[j-1])bubbleUp(j);
+		arr =newElem;
+		arr[arr.length-1]=input;
+		for(int j = arr.length-1; j>0; j--){
+			if(arr[j]< arr[j-1])bubbleUp(j);
 		}
 	}
-	
+	public void insert(int input){
+		add(input);
+	}
 	/**
 	 * Overrides the toString() method
 	 * @return A string containing the contents of the queue in the order in which they would be removed, separated by commas
 	 */
 	public String toString(){
 		String s="";
-		for (int value : element) {
+		for (int value : arr) {
 			s+=(value + ", ");
 		}
 		s=s.replaceAll(", $","");
@@ -62,9 +64,12 @@ public class PriorityIntQSorted {
 	 * @return The element in the front of the array
 	 */
 	public int findMin(){
-		return element[0];
+		return element();
 	}
 	
+	public int element(){
+		return arr[0];
+	}
 	/**
 	 * Alternate call to remove()
 	 * @return The value on the top of the queue
@@ -78,12 +83,12 @@ public class PriorityIntQSorted {
 	 * @return The value removed
 	 */
 	public int remove(){
-		int hold=element[0];
-		int[] newElem=new int[element.length-1];
+		int hold= arr[0];
+		int[] newElem=new int[arr.length-1];
 		for(int i=0;i<newElem.length;i++){
-			newElem[i]=element[i+1];
+			newElem[i]= arr[i+1];
 		}
-		element=newElem;
+		arr =newElem;
 		return hold;
 	}
 }
